@@ -1,7 +1,5 @@
 package com.xm.framework.tools;
 
-import com.xm.framework.database.DaoFactory;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
