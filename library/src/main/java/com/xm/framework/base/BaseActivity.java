@@ -34,7 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
         initStatusBar();
+        initView();
     }
+
+    protected abstract void initView();
 
     protected void initStatusBar() {
         int mode = getMode();
@@ -68,7 +71,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected @Mode int getMode() {
+    protected @Mode
+    int getMode() {
         return AndroidTools.getColorFromTheme(this, R.attr.activity_mode, MODE_IMMERSION);
     }
 

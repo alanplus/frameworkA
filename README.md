@@ -85,3 +85,47 @@ ApiResult apiResult = new ApiRequest(new ApiConfig() {
             }
         }).executeByGet();
 ```
+
+### 常用的View
+
+- HomeBottom 底部TAB
+
+1. xml 添加
+
+```
+<com.xm.framework.view.homebottom.HomeBottom
+    android:id="@+id/home_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="55dp" />
+```
+
+2. 实现接口 IHomeBottomConfig
+
+```
+public class RwHomeBottomConfig implements IHomeBottomConfig {
+
+    private Context context;
+
+    public RwHomeBottomConfig(Context context) {
+        this.context = context;
+    }
+
+    @Override
+    public IHomeBottomItem[] getItems() {
+        int dt = Color.parseColor("#212832");
+        int st = ContextCompat.getColor(ReciteWordApplication.app, R.color.theme1);
+        return new IHomeBottomItem[]{
+                new HomeBottomItem(context, new HomeBottomItemConfig("首页", dt, st, R.drawable.ic_index1, R.drawable.ic_index2)),
+                new HomeBottomItem(context, new HomeBottomItemConfig("我的", dt, st, R.drawable.ic_user1, R.drawable.ic_user2))
+        };
+    }
+}
+
+```
+
+3. 设置 HomeBottom
+
+```
+HomeBottom homeBottom = findViewById(R.id.home_bottom);
+homeBottom.setHomeBottomConfig(new RwHomeBottomConfig(this), yxViewPager);
+```
