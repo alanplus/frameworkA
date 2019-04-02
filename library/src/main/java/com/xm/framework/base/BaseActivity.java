@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Mouse on 2019/4/1.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T> extends AppCompatActivity implements IBaseView<T> {
 
     private static List<Activity> activityList = new ArrayList<>();
 
