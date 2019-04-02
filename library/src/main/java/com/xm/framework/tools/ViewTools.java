@@ -20,22 +20,24 @@ import io.reactivex.disposables.Disposable;
 public class ViewTools {
 
     public static void setClickEffection(View view) {
-        view.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setAlpha(0.6f);
-                    break;
-                case MotionEvent.ACTION_OUTSIDE:
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                case MotionEvent.ACTION_SCROLL:
-                    v.setAlpha(1.0f);
-                    break;
-                default:
-                    break;
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        v.setAlpha(0.6f);
+                        break;
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_SCROLL:
+                        v.setAlpha(1.0f);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
             }
-
-            return false;
         });
     }
 
