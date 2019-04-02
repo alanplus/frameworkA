@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Handler;
 
 import com.xm.framework.R;
+import com.xm.framework.database.DatabaseConfig;
 
 import java.io.File;
 import java.util.HashMap;
@@ -51,9 +52,9 @@ public abstract class AndroidToolsConfig {
     public void onActivityStop(Activity activity) {
     }
 
-//    public DatabaseConfig getDatabaseConfig() {
-//        return null;
-//    }
+    public DatabaseConfig getDatabaseConfig() {
+        return null;
+    }
 
     public Handler getHandler() {
         return null;
