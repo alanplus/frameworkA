@@ -23,7 +23,7 @@ dependencies {
 }
 ```
 
-### 初始化
+### 全局配置
 
 - MyAndroidToolsConfig继承AndroidToolsConfig 修改配置
 
@@ -31,6 +31,22 @@ dependencies {
 
 ```
 AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
+
+```
+
+- 主题样式
+
+```
+<style name="MyTheme" parent="XmAppTheme">
+    <!-- 标题栏颜色 -->
+    <item name="title_bar_color">@android:color/holo_green_light</item>
+    <!-- 状态栏颜色 -->
+    <item name="status_bar_color">#FFFFFF</item>
+    <!-- 状态栏图标是否为白色 -->
+    <item name="status_bar_text_is_white">false</item>
+    <!-- activity mode 0 不改变 1 沉浸式 2 穿透 -->
+    <item name="activity_mode">1</item>
+</style>
 
 ```
 
