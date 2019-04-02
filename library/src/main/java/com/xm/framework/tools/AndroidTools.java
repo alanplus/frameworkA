@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 /**
  * Created by Mouse on 2019/4/2.
@@ -219,5 +220,9 @@ public class AndroidTools {
     public static int getIntFromTheme(Context context, int id, int defaultvalue) {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
         return typedArray.getInteger(0, defaultvalue);
+    }
+
+    public static String generateUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }
