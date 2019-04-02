@@ -24,7 +24,6 @@ import java.lang.reflect.Method;
  */
 public class AndroidTools {
 
-
     /**
      * dp转px
      *
