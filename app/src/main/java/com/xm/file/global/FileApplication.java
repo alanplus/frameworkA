@@ -13,6 +13,5 @@ public class FileApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AndroidToolsConfig.init(new FileAndroidToolsConfig(this));
-        AndroidToolsConfig.androidToolsConfig.getStatusBarColor();
     }
 }

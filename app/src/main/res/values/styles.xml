@@ -10,6 +10,8 @@
 
     <style name="MyTheme" parent="XmAppTheme">
         <item name="title_bar_color">@android:color/holo_green_light</item>
+        <item name="status_bar_color">#FFFFFF</item>
+        <item name="status_bar_text_is_white">false</item>
     </style>
 
 </resources>

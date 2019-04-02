@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -198,5 +199,25 @@ public class AndroidTools {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static int getColorFromTheme(Context context, int id, int defaultColor) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getColor(0, defaultColor);
+    }
+
+    public static boolean getBoolFromTheme(Context context, int id, boolean defaultValue) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getBoolean(0, defaultValue);
+    }
+
+    public static String getStringFromTheme(Context context, int id) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getString(0);
+    }
+
+    public static int getIntFromTheme(Context context, int id, int defaultvalue) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getInteger(0, defaultvalue);
     }
 }

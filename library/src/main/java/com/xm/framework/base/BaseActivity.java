@@ -1,9 +1,15 @@
 package com.xm.framework.base;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.xm.framework.R;
+import com.xm.framework.tools.AndroidTools;
+import com.xm.framework.tools.statusbar.StatusBarTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +17,38 @@ import java.util.List;
 /**
  * Created by Mouse on 2019/4/1.
  */
-public abstract class BaseActivity<T> extends AppCompatActivity implements IBaseView<T> {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private static List<Activity> activityList = new ArrayList<>();
+
+    public static final int MODE_COMMON = 0;
+    public static final int MODE_IMMERSION = 1;
+    public static final int MODE_TRANSLATE = 2;
+
+    @IntDef({MODE_COMMON, MODE_IMMERSION, MODE_TRANSLATE})
+    @interface Mode {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
+        initStatusBar();
+    }
+
+    protected void initStatusBar() {
+        int mode = getMode();
+        switch (mode) {
+            case MODE_IMMERSION:
+                setImmersionMode();
+                break;
+            case MODE_TRANSLATE:
+                setTranslateMode();
+                break;
+            case MODE_COMMON:
+            default:
+                break;
+        }
     }
 
     protected abstract int getContentId();
@@ -36,5 +66,19 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements IBase
                 a.finish();
             }
         }
+    }
+
+    protected @Mode int getMode() {
+        return AndroidTools.getColorFromTheme(this, R.attr.activity_mode, MODE_IMMERSION);
+    }
+
+    protected void setImmersionMode() {
+        int colorFromTheme = AndroidTools.getColorFromTheme(this, R.attr.status_bar_color, Color.WHITE);
+        boolean isWhite = AndroidTools.getBoolFromTheme(this, R.attr.status_bar_text_is_white, false);
+        StatusBarTools.getStatusBarTools().setStatusBarColor(this, colorFromTheme, isWhite);
+    }
+
+    protected void setTranslateMode() {
+        StatusBarTools.setTranslucent(this);
     }
 }

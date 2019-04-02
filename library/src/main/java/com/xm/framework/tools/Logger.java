@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.xm.framework.R;
 import com.xm.framework.global.AndroidToolsConfig;
 
 import java.io.File;
@@ -17,7 +18,9 @@ public class Logger {
 
 
     public static void writeFile(String text) {
-        if (!AndroidToolsConfig.androidToolsConfig.isDebug()) return;
+        if(!isDebug()){
+            return;
+        }
         String path = Environment.getExternalStorageDirectory().getPath() + "/a.txt";
         File file = new File(path);
         if (file.exists()) {
@@ -35,7 +38,7 @@ public class Logger {
     }
 
     public static void append(String text) {
-        if (!AndroidToolsConfig.androidToolsConfig.isDebug() || TextUtils.isEmpty(text)) return;
+        if (!isDebug() || TextUtils.isEmpty(text)) return;
         String path = Environment.getExternalStorageDirectory().getPath() + "/a.txt";
         File file = new File(path);
 
@@ -53,7 +56,7 @@ public class Logger {
     }
 
     public static void writeFile(String text, String path, String name) {
-        if (!AndroidToolsConfig.androidToolsConfig.isDebug()) return;
+        if (!isDebug()) return;
 
         File fileDir = new File(path);
         if (!fileDir.exists()) {
@@ -116,7 +119,7 @@ public class Logger {
     }
 
     private static void println(int priority, String tag, String msg) {
-        if (TextUtils.isEmpty(tag) || TextUtils.isEmpty(msg) || !AndroidToolsConfig.androidToolsConfig.isDebug())
+        if (TextUtils.isEmpty(tag) || TextUtils.isEmpty(msg) || !isDebug())
             return;
 
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
@@ -133,7 +136,7 @@ public class Logger {
     }
 
     private static void println(String tag, String msg, Throwable e) {
-        if (TextUtils.isEmpty(tag) || TextUtils.isEmpty(msg) || !AndroidToolsConfig.androidToolsConfig.isDebug())
+        if (TextUtils.isEmpty(tag) || TextUtils.isEmpty(msg) || !isDebug())
             return;
 
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
@@ -163,5 +166,12 @@ public class Logger {
             if (!TextUtils.isEmpty(msg))
                 Log.println(priority, tag, info + "segmentIndex:" + segmentIndex + ":" + msg);// 打印剩余日志
         }
+    }
+
+    public static boolean isDebug(){
+        if(AndroidToolsConfig.androidToolsConfig==null){
+            return false;
+        }
+        return AndroidTools.getBoolFromTheme(AndroidToolsConfig.androidToolsConfig.context, R.attr.is_debug, false);
     }
 }

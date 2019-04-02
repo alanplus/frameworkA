@@ -2,6 +2,10 @@
 <resources>
 
     <attr name="title_bar_color" format="color|reference" />
+    <attr name="status_bar_color" format="color|reference" />
+    <attr name="status_bar_text_is_white" format="boolean" />
+    <attr name="is_debug" format="boolean" />
+    <attr name="activity_mode" format="integer" />
 
 
 </resources>
