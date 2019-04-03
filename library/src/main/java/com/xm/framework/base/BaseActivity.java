@@ -11,6 +11,8 @@ import com.xm.framework.R;
 import com.xm.framework.tools.AndroidTools;
 import com.xm.framework.tools.statusbar.StatusBarTools;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +35,25 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
+        initEventBus();
         initStatusBar();
         initView();
+    }
+
+    private void initEventBus() {
+        if (isOpenEventBus()) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    protected boolean isOpenEventBus() {
+        return false;
+    }
+
+    protected void unregistEvenBus() {
+        if (isOpenEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     protected abstract void initView();
@@ -84,5 +103,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setTranslateMode() {
         StatusBarTools.setTranslucent(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregistEvenBus();
     }
 }

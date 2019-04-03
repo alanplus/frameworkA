@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="title_bar_color">?colorPrimary</item>
+        <item name="title_bar_back_icon">@drawable/icon_titlebar_back_light</item>
         <item name="status_bar_color">?title_bar_color</item>
         <item name="status_bar_text_is_white">false</item>
         <item name="is_debug">false</item>

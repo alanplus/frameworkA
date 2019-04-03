@@ -2,10 +2,17 @@
 <resources>
 
     <attr name="title_bar_color" format="color|reference" />
+    <attr name="title_bar_back_icon" format="reference" />
     <attr name="status_bar_color" format="color|reference" />
     <attr name="status_bar_text_is_white" format="boolean" />
     <attr name="is_debug" format="boolean" />
     <attr name="activity_mode" format="integer" />
 
+
+    <declare-styleable name="CommontTitleBarView">
+        <attr name="is_light" format="boolean" />
+        <attr name="bar_title" format="string|reference" />
+        <attr name="divider_enable" format="boolean" />
+    </declare-styleable>
 
 </resources>

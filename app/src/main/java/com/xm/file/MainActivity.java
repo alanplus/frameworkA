@@ -7,6 +7,11 @@ import com.xm.framework.base.BaseActivity;
  */
 public class MainActivity extends BaseActivity {
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected int getContentId() {
         return R.layout.activity_main;
     }
