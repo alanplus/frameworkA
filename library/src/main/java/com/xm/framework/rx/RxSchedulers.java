@@ -26,11 +26,11 @@ public class RxSchedulers {
     }
 
 
-    public static <T> ObservableTransformer<T, T> threadMain() {
-        return new ObservableTransformer<T, T>() {
+    public static <T> ObservableTransformer<String, T> threadMain() {
+        return new ObservableTransformer<String, T>() {
             @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+            public ObservableSource<T> apply(Observable<String> upstream) {
+                return (ObservableSource<T>) upstream.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
