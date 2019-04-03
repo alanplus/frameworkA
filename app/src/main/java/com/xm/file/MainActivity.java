@@ -15,4 +15,5 @@ public class MainActivity extends BaseActivity {
     protected int getContentId() {
         return R.layout.activity_main;
     }
+
 }

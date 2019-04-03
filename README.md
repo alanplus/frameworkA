@@ -129,3 +129,22 @@ public class RwHomeBottomConfig implements IHomeBottomConfig {
 HomeBottom homeBottom = findViewById(R.id.home_bottom);
 homeBottom.setHomeBottomConfig(new RwHomeBottomConfig(this), yxViewPager);
 ```
+
+### BaseActivity
+
+- 封装了EventBus
+
+开启EventBus
+```
+
+@Override
+protected boolean isOpenEventBus() {
+    return true;
+}
+
+@Subscribe(threadMode = ThreadMode.MAIN)
+public void onEventMainThread(Object eventMessage) {
+
+}
+
+```
