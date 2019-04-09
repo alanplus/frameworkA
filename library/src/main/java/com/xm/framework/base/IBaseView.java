@@ -7,5 +7,7 @@ public interface IBaseView<T> {
 
     void showSuccess(T t);
 
-    void showFailure(int code, String msg);
+    void showFailure(int code, String msg, boolean retry);
+
+    void showLoading(String msg);
 }
