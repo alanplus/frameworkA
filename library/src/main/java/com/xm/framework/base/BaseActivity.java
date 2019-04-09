@@ -35,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
+        activityList.add(this);
         initEventBus();
         initStatusBar();
         initView();
@@ -109,5 +110,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregistEvenBus();
+        activityList.remove(this);
+    }
+
+    public Activity getActivity() {
+        return this;
     }
 }
