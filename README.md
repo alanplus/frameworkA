@@ -64,6 +64,20 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 - 'com.android.support:appcompat-v7:28.0.0'
 - 'com.android.support:recyclerview-v7:26.1.0'
 - 'com.android.support.constraint:constraint-layout:1.1.3'
+- implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
+- implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+- implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+- 'com.github.tbruyelle:rxpermissions:0.10.2@aar'
+
+
+### rxpermissions使用说明
+
+```
+依赖于
+implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
+implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+```
 
 #### 网络框架
 

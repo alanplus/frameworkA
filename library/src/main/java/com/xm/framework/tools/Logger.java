@@ -4,7 +4,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.xm.framework.R;
 import com.xm.framework.global.AndroidToolsConfig;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class Logger {
 
 
     public static void writeFile(String text) {
-        if(!isDebug()){
+        if (!isDebug()) {
             return;
         }
         String path = Environment.getExternalStorageDirectory().getPath() + "/a.txt";
@@ -76,14 +75,19 @@ public class Logger {
         }
     }
 
-    private static final String TAG = "weiciLog";
+    private static String getTag() {
+        if (AndroidToolsConfig.androidToolsConfig == null) {
+            return "alan";
+        }
+        return AndroidToolsConfig.androidToolsConfig.logTag();
+    }
 
     public static void i(String msg) {
-        println(Log.INFO, TAG, msg);
+        println(Log.INFO, getTag(), msg);
     }
 
     public static void e(String msg) {
-        println(Log.ERROR, TAG, msg);
+        println(Log.ERROR, getTag(), msg);
     }
 
     public static void e(String tag, String msg) {
@@ -95,7 +99,7 @@ public class Logger {
     }
 
     public static void w(String msg) {
-        println(Log.WARN, TAG, msg);
+        println(Log.WARN, getTag(), msg);
     }
 
     public static void w(String tag, String msg) {
@@ -115,7 +119,7 @@ public class Logger {
     }
 
     public static void d(String s) {
-        println(Log.DEBUG, TAG, s);
+        println(Log.DEBUG, getTag(), s);
     }
 
     private static void println(int priority, String tag, String msg) {
@@ -168,10 +172,10 @@ public class Logger {
         }
     }
 
-    public static boolean isDebug(){
-        if(AndroidToolsConfig.androidToolsConfig==null){
+    public static boolean isDebug() {
+        if (AndroidToolsConfig.androidToolsConfig == null) {
             return false;
         }
-        return AndroidTools.getBoolFromTheme(AndroidToolsConfig.androidToolsConfig.context, R.attr.is_debug, false);
+        return AndroidToolsConfig.androidToolsConfig.isDebug();
     }
 }

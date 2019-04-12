@@ -1,16 +1,11 @@
 package com.xm.framework.global;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Handler;
 
-import com.xm.framework.R;
 import com.xm.framework.database.DatabaseConfig;
 
 import java.io.File;
-import java.util.HashMap;
 
 /**
  * Created by Mouse on 2018/10/18.
@@ -45,8 +40,17 @@ public abstract class AndroidToolsConfig {
         }
         return path;
     }
+
     public String getExternalDatabaseName() {
         return null;
+    }
+
+    public boolean isDebug() {
+        return false;
+    }
+
+    public String logTag() {
+        return "alan";
     }
 
 }
