@@ -59,6 +59,12 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 - 常用的工具类
 - 常用的View
 
+### 常用依赖库
+
+- 'com.android.support:appcompat-v7:28.0.0'
+- 'com.android.support:recyclerview-v7:26.1.0'
+- 'com.android.support.constraint:constraint-layout:1.1.3'
+
 #### 网络框架
 
 根据项目需要 可以 自行封装 ApiConfig
