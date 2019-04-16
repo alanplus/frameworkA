@@ -30,6 +30,7 @@ public class GsonHelper {
         return mGson.fromJson(json, classOfT);
     }
 
+
     /**
      * 将对象准换为json字符串 或者 把list 转化成json
      *
