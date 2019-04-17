@@ -3,6 +3,7 @@ package com.xm.framework.base;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -97,9 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setImmersionMode() {
-        int colorFromTheme = AndroidTools.getColorFromTheme(this, R.attr.status_bar_color, Color.WHITE);
-        boolean isWhite = AndroidTools.getBoolFromTheme(this, R.attr.status_bar_text_is_white, false);
-        StatusBarTools.getStatusBarTools().setStatusBarColor(this, colorFromTheme, isWhite);
+        StatusBarTools.getStatusBarTools().setStatusBarColor(this, getStatusBarColor(), isWhite());
     }
 
     protected void setTranslateMode() {
@@ -115,5 +114,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public Activity getActivity() {
         return this;
+    }
+
+    protected @ColorInt
+    int getStatusBarColor() {
+        return AndroidTools.getColorFromTheme(this, R.attr.status_bar_color, Color.WHITE);
+    }
+
+    protected boolean isWhite() {
+        return AndroidTools.getBoolFromTheme(this, R.attr.status_bar_text_is_white, false);
     }
 }
