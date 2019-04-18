@@ -16,10 +16,10 @@ public abstract class BaseRelativeLayout extends RelativeLayout {
 
     public BaseRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        initView(attrs);
     }
 
-    protected void initView() {
+    protected void initView(AttributeSet attrs) {
         LayoutInflater.from(getContext()).inflate(getContentId(), this);
 
     }

@@ -16,10 +16,10 @@ public abstract class BaseFrameLayout extends FrameLayout {
 
     public BaseFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        initView(attrs);
     }
 
-    protected void initView() {
+    protected void initView(AttributeSet attrs) {
         LayoutInflater.from(getContext()).inflate(getContentId(), this);
 
     }
