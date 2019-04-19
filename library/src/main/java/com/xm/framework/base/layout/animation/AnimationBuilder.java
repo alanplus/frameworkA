@@ -20,7 +20,7 @@ public class AnimationBuilder {
         int duration = viewAnimationConfig.getDuration();
         int repeatMode = viewAnimationConfig.getRepeatMode();
         int count = viewAnimationConfig.getCount();
-        Animation.AnimationListener animationListener = viewAnimationConfig.getAnimationListener();
+        Animation.AnimationListener animationListener = viewAnimationConfig.getAnimationListener(view);
         TranslateAnimation translateAnimation = new TranslateAnimation(startX, endX, startY, endY);
         translateAnimation.setDuration(duration);
         translateAnimation.setRepeatMode(repeatMode);
