@@ -3,6 +3,7 @@ package com.xm.framework.base.layout;
 import android.view.View;
 
 import com.xm.framework.base.layout.animation.AnimationBuilder;
+import com.xm.framework.base.layout.animation.DefaultHiddenAnimationInflater;
 import com.xm.framework.base.layout.animation.DefaultShowAnimationInflater;
 
 /**
@@ -26,7 +27,7 @@ public class BaseLayoutHelper implements IBaseLayout {
 
     @Override
     public void hidden() {
-        AnimationBuilder.startTranslateAnimation(view, viewHiddenAnimationConfig == null ? new DefaultShowAnimationInflater() : viewHiddenAnimationConfig);
+        AnimationBuilder.startTranslateAnimation(view, viewHiddenAnimationConfig == null ? new DefaultHiddenAnimationInflater() : viewHiddenAnimationConfig);
     }
 
     @Override
