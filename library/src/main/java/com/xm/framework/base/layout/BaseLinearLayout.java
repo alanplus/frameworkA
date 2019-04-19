@@ -8,7 +8,9 @@ import android.widget.LinearLayout;
 /**
  * Created by Mouse on 2019/4/12.
  */
-public abstract class BaseLinearLayout extends LinearLayout {
+public abstract class BaseLinearLayout extends LinearLayout implements IBaseLayout {
+
+    private BaseLayoutHelper baseLayoutHelper;
 
     public BaseLinearLayout(Context context) {
         this(context, null);
@@ -21,8 +23,28 @@ public abstract class BaseLinearLayout extends LinearLayout {
 
     protected void initView(AttributeSet attrs) {
         LayoutInflater.from(getContext()).inflate(getContentId(), this);
-
+        baseLayoutHelper = new BaseLayoutHelper(this);
     }
 
     protected abstract int getContentId();
+
+    @Override
+    public void show() {
+        baseLayoutHelper.show();
+    }
+
+    @Override
+    public void hidden() {
+        baseLayoutHelper.hidden();
+    }
+
+    @Override
+    public void setShowAnimationConfig(ViewAnimationConfig viewShowAnimationConfig) {
+        baseLayoutHelper.setShowAnimationConfig(viewShowAnimationConfig);
+    }
+
+    @Override
+    public void setHiddenAnimationConfig(ViewAnimationConfig viewShowAnimationConfig) {
+        baseLayoutHelper.setHiddenAnimationConfig(viewShowAnimationConfig);
+    }
 }
