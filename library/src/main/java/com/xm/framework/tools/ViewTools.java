@@ -9,7 +9,6 @@ import android.widget.ListView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxAdapterView;
 
-import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
@@ -134,15 +133,20 @@ public class ViewTools {
         if (measuredHeight > 0) {
             return measuredHeight;
         }
-        try {
-            Method m = view.getClass().getDeclaredMethod("onMeasure", int.class, int.class);
-            m.setAccessible(true);
-            m.invoke(view, View.MeasureSpec.makeMeasureSpec(
-                    ((View) view.getParent()).getMeasuredWidth(),
-                    View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0,
-                    View.MeasureSpec.UNSPECIFIED));
-        } catch (Exception ignore) {
-        }
+        int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        view.measure(width, height);
         return view.getMeasuredHeight();
+    }
+
+    public static int getTargetWidth(View view) {
+        int measuredWidth = view.getMeasuredWidth();
+        if (measuredWidth > 0) {
+            return measuredWidth;
+        }
+        int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        view.measure(width, height);
+        return view.getMeasuredWidth();
     }
 }
