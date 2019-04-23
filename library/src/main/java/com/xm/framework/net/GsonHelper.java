@@ -6,6 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,6 +72,19 @@ public class GsonHelper {
         Type type = new TypeToken<HashMap<String, T>>() {
         }.getType();
         return mGson.toJson(map, type);
+    }
+
+    public static <T> String listToString(List<T> list) {
+        JSONArray jsonArray = new JSONArray();
+        for (T t : list) {
+            if (t instanceof String) {
+                jsonArray.put(t);
+            } else {
+                String string = objectToString(t);
+                jsonArray.put(string);
+            }
+        }
+        return jsonArray.toString();
     }
 
 }
