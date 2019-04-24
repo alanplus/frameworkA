@@ -50,6 +50,7 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 
 ```
 
+
 ### 主要功能
 
 - 网络框架（封装 Okhttp）
@@ -68,6 +69,10 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 - implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 - implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 - 'com.github.tbruyelle:rxpermissions:0.10.2@aar'
+
+### 依赖的库
+
+- implementation 'com.google.code.gson:gson:2.7'
 
 
 ### rxpermissions使用说明
@@ -229,4 +234,22 @@ public class AudioDownloadConfig implements IDownloadConfig {
 ```
 AudioDownloadView audioDownloadView = findViewbyId(1);
 audioDownloadView.setAudioDownloadConfig(new AudioDownloadConfig(path, false));
+```
+
+### NeverCrash
+
+集成了第三方库 NeverCrash
+
+```
+ NeverCrash.init(new NeverCrash.CrashHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                Log.d("Jenly", Log.getStackTraceString(e));
+//                e.printStackTrace();
+                //异步
+                showToast(e.getMessage());
+
+
+            }
+        });
 ```
