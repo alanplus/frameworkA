@@ -244,8 +244,7 @@ audioDownloadView.setAudioDownloadConfig(new AudioDownloadConfig(path, false));
  NeverCrash.init(new NeverCrash.CrashHandler() {
             @Override
             public void uncaughtException(Thread t, Throwable e) {
-                Log.d("Jenly", Log.getStackTraceString(e));
-//                e.printStackTrace();
+                Log.d("Alan", Log.getStackTraceString(e));
                 //异步
                 showToast(e.getMessage());
 
