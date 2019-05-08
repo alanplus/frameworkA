@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.xm.framework.R;
 import com.xm.framework.buttondrawable.DrawableFactory;
 import com.xm.framework.tools.AndroidTools;
+import com.xm.framework.tools.ViewTools;
 
 /**
  * Created by Mouse on 2018/6/18.
@@ -134,9 +136,9 @@ public class CommonTitleBar extends RelativeLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.view_common_titlebar, this);
         setBackgroundColor(bgColor);
         initBackButton();
-        initTitle();
         initDivider();
         initRightView();
+        initTitle();
     }
 
     private void initBackButton() {
@@ -156,7 +158,15 @@ public class CommonTitleBar extends RelativeLayout {
         title = findViewById(R.id.main_tilte);
         title.setTextColor(titleColor);
         title.setText(titleStr);
-        title.setTextSize(titleTextSize);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
+        if (rightShowType == 1) {
+            int targetWidth = ViewTools.getTargetWidth(rightText);
+            int i = AndroidTools.dip2px(getContext(), 48);
+            int max = Math.max(targetWidth, i);
+            RelativeLayout.LayoutParams lp = (LayoutParams) title.getLayoutParams();
+            lp.leftMargin = max + AndroidTools.dip2px(getContext(), 10);
+            lp.rightMargin = max + AndroidTools.dip2px(getContext(), 10);
+        }
     }
 
     private void initDivider() {
@@ -176,7 +186,7 @@ public class CommonTitleBar extends RelativeLayout {
                 rightText.setVisibility(View.VISIBLE);
                 rightText.setText(rightTextStr);
                 rightText.setTextColor(righttextColor);
-                rightText.setTextSize(righttextSize);
+                rightText.setTextSize(TypedValue.COMPLEX_UNIT_PX, righttextSize);
                 break;
             case 2:
                 findViewById(R.id.right_view).setVisibility(View.VISIBLE);
@@ -218,7 +228,7 @@ public class CommonTitleBar extends RelativeLayout {
 
     public void setRightTextSize(int textSize) {
         this.righttextSize = textSize;
-        rightText.setTextSize(righttextSize);
+        rightText.setTextSize(TypedValue.COMPLEX_UNIT_PX, righttextSize);
     }
 
     public void setRighttextColor(@ColorInt int color) {
