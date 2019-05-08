@@ -70,4 +70,14 @@
         <attr name="max_height" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="CommonItem">
+        <attr name="ci_title" format="string|reference" />
+        <attr name="ci_sub_title" format="string|reference" />
+        <attr name="ci_right_text" format="string|reference" />
+        <attr name="ci_is_show_right" format="boolean" />
+        <attr name="ci_icon" format="reference" />
+        <attr name="ci_show_top_line" format="boolean" />
+        <attr name="ci_show_bottom_line" format="boolean" />
+    </declare-styleable>
+
 </resources>
