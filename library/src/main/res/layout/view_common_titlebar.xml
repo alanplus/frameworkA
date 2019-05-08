@@ -50,7 +50,6 @@
             android:gravity="center"
             android:minWidth="48dp"
             android:layout_marginRight="12dp"
-            android:paddingRight="15dp"
             android:textSize="16dp"
             android:text="退出登陆"
             android:visibility="visible" />
