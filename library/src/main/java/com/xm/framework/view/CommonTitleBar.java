@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -27,7 +28,6 @@ public class CommonTitleBar extends RelativeLayout {
     private TextView title, rightText;
     private ImageButton imageButtonBack;
 
-    private boolean isLight;
     private String titleStr;
     private boolean enableDivider;
     private View divider;
@@ -36,6 +36,26 @@ public class CommonTitleBar extends RelativeLayout {
     private int righttextSize;
     private int righttextColor;
     private int iconRes;
+
+    private int leftIconRes;
+    private @ColorInt
+    int bgColor;
+
+    private @ColorInt
+    int titleColor;
+
+    private float titleTextSize;
+
+    /**
+     * 0 隐藏右侧所有元素
+     * 1 隐藏 icon 显示文本
+     * 2 隐藏 文本 显示icon
+     */
+    private int rightShowType;
+
+    private Drawable leftDrawable, topDrawable, rightDrawable, bottomDrawable;
+    private float drawablePadding;
+
 
     @Override
     public void removeOnUnhandledKeyEventListener(OnUnhandledKeyEventListener listener) {
@@ -53,32 +73,75 @@ public class CommonTitleBar extends RelativeLayout {
     }
 
     private void initAttrs(AttributeSet attributeSet) {
-        isLight = false;
         enableDivider = true;
         if (null != attributeSet) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attributeSet, R.styleable.CommontTitleBarView);
+
+            leftIconRes = typedArray.getResourceId(R.styleable.CommontTitleBarView_bar_back_icon, getDefaultBackIcon());
+            bgColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_bg_color, getDefaultBgColor());
+
             titleStr = typedArray.getString(R.styleable.CommontTitleBarView_bar_title);
-            isLight = typedArray.getBoolean(R.styleable.CommontTitleBarView_is_light, false);
-            enableDivider = typedArray.getBoolean(R.styleable.CommontTitleBarView_divider_enable, true);
+            titleColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_title_color, getDefaultTitleColor());
+            titleTextSize = typedArray.getDimension(R.styleable.CommontTitleBarView_bar_title_size, getDefaultTitleSize());
+
+            enableDivider = typedArray.getBoolean(R.styleable.CommontTitleBarView_divider_enable, getDefaultEnableDivider());
+
+            rightShowType = typedArray.getInt(R.styleable.CommontTitleBarView_bar_right_show_type, 0);
             rightTextStr = typedArray.getString(R.styleable.CommontTitleBarView_bar_right_text);
-            righttextSize = (int) typedArray.getDimension(R.styleable.CommontTitleBarView_bar_right_text_size, AndroidTools.dip2px(getContext(), 16));
-            righttextColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_right_text_color, isLight ? Color.parseColor("#535353") : Color.WHITE);
+            righttextSize = (int) typedArray.getDimension(R.styleable.CommontTitleBarView_bar_right_text_size, getDefaultRightTextSize());
+            righttextColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_right_text_color, getDefaultRightTextColor());
             iconRes = typedArray.getResourceId(R.styleable.CommontTitleBarView_bar_right_icon, 0);
+
+            leftDrawable = typedArray.getDrawable(R.styleable.CommontTitleBarView_bar_right_left_icon);
+            topDrawable = typedArray.getDrawable(R.styleable.CommontTitleBarView_bar_right_top_icon);
+            rightDrawable = typedArray.getDrawable(R.styleable.CommontTitleBarView_bar_right_right_icon);
+            bottomDrawable = typedArray.getDrawable(R.styleable.CommontTitleBarView_bar_right_bottom_icon);
+            drawablePadding = typedArray.getDimension(R.styleable.CommontTitleBarView_bar_right_drawable_padding, AndroidTools.dip2px(getContext(), 3));
+
             typedArray.recycle();
         }
     }
 
+    private int getDefaultBackIcon() {
+        return AndroidTools.getResourceIdFromTheme(getContext(), R.attr.title_bar_back_icon, R.drawable.icon_titlebar_back);
+    }
+
+    private int getDefaultBgColor() {
+        return AndroidTools.getColorFromTheme(getContext(), R.attr.title_bar_color, Color.WHITE);
+    }
+
+    private int getDefaultTitleColor() {
+        return AndroidTools.getColorFromTheme(getContext(), R.attr.title_bar_title_color, Color.parseColor("#535353"));
+    }
+
+    private float getDefaultTitleSize() {
+        return AndroidTools.getDimissionFromTheme(getContext(), R.attr.title_bar_title_size, AndroidTools.dip2px(getContext(), 18));
+    }
+
+    private boolean getDefaultEnableDivider() {
+        return AndroidTools.getBoolFromTheme(getContext(), R.attr.title_bar_enable_divider, true);
+    }
+
+    private float getDefaultRightTextSize() {
+        return AndroidTools.getDimissionFromTheme(getContext(), R.attr.title_bar_right_text_size, AndroidTools.dip2px(getContext(), 16));
+    }
+
+    private int getDefaultRightTextColor() {
+        return AndroidTools.getColorFromTheme(getContext(), R.attr.title_bar_right_text_color, Color.parseColor("#535353"));
+    }
+
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_common_titlebar, this);
-        title = findViewById(R.id.main_tilte);
-        title.setTextColor(isLight ? Color.parseColor("#535353") : Color.WHITE);
-        title.setText(titleStr);
+        setBackgroundColor(bgColor);
+        initBackButton();
+        initTitle();
+        initDivider();
+        initRightView();
+    }
+
+    private void initBackButton() {
         imageButtonBack = findViewById(R.id.icon_back);
-        divider = findViewById(R.id.divider_line);
-        divider.setVisibility(enableDivider ? View.VISIBLE : View.INVISIBLE);
-        imageButtonBack.setImageResource(isLight ? R.drawable.icon_titlebar_back : R.drawable.icon_titlebar_back_light);
-        rightText = findViewById(R.id.right_text);
-        rightText.setTextColor(isLight ? Color.parseColor("#535353") : Color.WHITE);
+        imageButtonBack.setImageResource(leftIconRes);
         imageButtonBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,32 +150,61 @@ public class CommonTitleBar extends RelativeLayout {
                 }
             }
         });
-        initRightView();
+    }
+
+    private void initTitle() {
+        title = findViewById(R.id.main_tilte);
+        title.setTextColor(titleColor);
+        title.setText(titleStr);
+        title.setTextSize(titleTextSize);
+    }
+
+    private void initDivider() {
+        divider = findViewById(R.id.divider_line);
+        divider.setVisibility(enableDivider ? View.VISIBLE : View.GONE);
     }
 
     private void initRightView() {
-        if (TextUtils.isEmpty(rightTextStr) && iconRes == 0) {
-            findViewById(R.id.right_view).setVisibility(View.GONE);
-        } else {
-            findViewById(R.id.right_view).setVisibility(View.VISIBLE);
+        rightText = findViewById(R.id.right_text);
+        switch (rightShowType) {
+            case 0:
+                findViewById(R.id.right_view).setVisibility(View.GONE);
+                break;
+            case 1:
+                findViewById(R.id.right_view).setVisibility(View.VISIBLE);
+                findViewById(R.id.view1).setVisibility(View.GONE);
+                rightText.setVisibility(View.VISIBLE);
+                rightText.setText(rightTextStr);
+                rightText.setTextColor(righttextColor);
+                rightText.setTextSize(righttextSize);
+                break;
+            case 2:
+                findViewById(R.id.right_view).setVisibility(View.VISIBLE);
+                findViewById(R.id.view1).setVisibility(View.VISIBLE);
+                rightText.setVisibility(View.GONE);
+                findViewById(R.id.icon1).setBackgroundResource(iconRes);
+                break;
         }
-
-        if (!TextUtils.isEmpty(rightTextStr)) {
-            findViewById(R.id.view1).setVisibility(View.GONE);
-            rightText.setText(rightTextStr);
-            rightText.setTextColor(righttextColor);
-            rightText.setTextSize(righttextSize);
-            rightText.setVisibility(View.VISIBLE);
-            return;
-        }
-
-        if (iconRes != 0) {
-            findViewById(R.id.icon1).setBackgroundResource(iconRes);
-            rightText.setVisibility(View.GONE);
-            findViewById(R.id.view1).setVisibility(View.VISIBLE);
-        }
+        setRightTextDrawable();
     }
 
+    private void setRightTextDrawable() {
+        if (null == leftDrawable && topDrawable == null && rightDrawable == null && bottomDrawable == null) {
+            return;
+        }
+        setDrawableBound(leftDrawable);
+        setDrawableBound(topDrawable);
+        setDrawableBound(rightDrawable);
+        setDrawableBound(bottomDrawable);
+        rightText.setCompoundDrawables(leftDrawable, topDrawable, rightDrawable, bottomDrawable);
+        rightText.setCompoundDrawablePadding((int) drawablePadding);
+    }
+
+    private void setDrawableBound(Drawable drawable) {
+        if (drawable != null) {
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        }
+    }
 
     public void setOnRightViewClickListener(OnClickListener onRightViewClickListener) {
         findViewById(R.id.right_view).setOnClickListener(onRightViewClickListener);

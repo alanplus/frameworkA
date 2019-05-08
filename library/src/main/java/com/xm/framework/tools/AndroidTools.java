@@ -222,6 +222,16 @@ public class AndroidTools {
         return typedArray.getInteger(0, defaultvalue);
     }
 
+    public static float getDimissionFromTheme(Context context, int id, int defaultvalue) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getDimension(0, defaultvalue);
+    }
+
+    public static int getResourceIdFromTheme(Context context, int id, int defaultvalue) {
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(new int[]{id});
+        return typedArray.getResourceId(0, defaultvalue);
+    }
+
     public static String generateUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
