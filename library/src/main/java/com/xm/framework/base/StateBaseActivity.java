@@ -3,12 +3,16 @@ package com.xm.framework.base;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xm.framework.base.dialog.LoadingDialog;
+import com.xm.framework.tools.ToastManager;
 import com.xm.framework.view.state.IStateViewListener;
 
 /**
  * Created by Mouse on 2019/4/9.
  */
 public abstract class StateBaseActivity<T> extends BaseActivity implements IBaseView<T> {
+
+    private LoadingDialog loadingDialog;
 
     @Override
     public void showFailure(int code, String msg, boolean isRetry) {
@@ -53,5 +57,60 @@ public abstract class StateBaseActivity<T> extends BaseActivity implements IBase
             }
             return null;
         }
+    }
+
+    @Override
+    public void showLoadingDialog(String text) {
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.setText(text);
+        loadingDialog.show();
+    }
+
+    @Override
+    public void dismissSuccessLoadingDialog(String text) {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss(text, true);
+        }
+    }
+
+    @Override
+    public void dismissFailedLoadingDialog(String text) {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss(text, false);
+        }
+    }
+
+    @Override
+    public void dismissSuccessLoadingDialog(String text, LoadingDialog.OnDialogDismissListener onDialogDismissListener) {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss(text, true, onDialogDismissListener);
+        }
+    }
+
+    @Override
+    public void dismissFailedLoadingDialog(String text, LoadingDialog.OnDialogDismissListener onDialogDismissListener) {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss(text, false, onDialogDismissListener);
+        }
+    }
+
+    @Override
+    public void dismissSuccessLoadingDialog() {
+        dismissSuccessLoadingDialog("加载成功");
+    }
+
+    @Override
+    public void dismissFailedLoadingDialog() {
+        dismissFailedLoadingDialog("加载失败");
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastManager.getInstance().showToast(this, msg);
+    }
+
+    @Override
+    public void showLoadingDialog() {
+        showLoadingDialog("正在加载...");
     }
 }
