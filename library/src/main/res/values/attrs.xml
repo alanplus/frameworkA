@@ -13,6 +13,10 @@
         <attr name="is_light" format="boolean" />
         <attr name="bar_title" format="string|reference" />
         <attr name="divider_enable" format="boolean" />
+        <attr name="bar_right_text" format="string|reference" />
+        <attr name="bar_right_text_color" format="color|reference" />
+        <attr name="bar_right_text_size" format="dimension" />
+        <attr name="bar_right_icon" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="WeiCiView">

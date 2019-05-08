@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.xm.framework.R;
 import com.xm.framework.buttondrawable.DrawableFactory;
+import com.xm.framework.tools.AndroidTools;
 
 /**
  * Created by Mouse on 2018/6/18.
@@ -28,6 +31,16 @@ public class CommonTitleBar extends RelativeLayout {
     private String titleStr;
     private boolean enableDivider;
     private View divider;
+
+    private String rightTextStr;
+    private int righttextSize;
+    private int righttextColor;
+    private int iconRes;
+
+    @Override
+    public void removeOnUnhandledKeyEventListener(OnUnhandledKeyEventListener listener) {
+        super.removeOnUnhandledKeyEventListener(listener);
+    }
 
     public CommonTitleBar(Context context) {
         this(context, null);
@@ -47,6 +60,10 @@ public class CommonTitleBar extends RelativeLayout {
             titleStr = typedArray.getString(R.styleable.CommontTitleBarView_bar_title);
             isLight = typedArray.getBoolean(R.styleable.CommontTitleBarView_is_light, false);
             enableDivider = typedArray.getBoolean(R.styleable.CommontTitleBarView_divider_enable, true);
+            rightTextStr = typedArray.getString(R.styleable.CommontTitleBarView_bar_right_text);
+            righttextSize = (int) typedArray.getDimension(R.styleable.CommontTitleBarView_bar_right_text_size, AndroidTools.dip2px(getContext(), 16));
+            righttextColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_right_text_color, isLight ? Color.parseColor("#535353") : Color.WHITE);
+            iconRes = typedArray.getResourceId(R.styleable.CommontTitleBarView_bar_right_icon, 0);
             typedArray.recycle();
         }
     }
@@ -70,12 +87,53 @@ public class CommonTitleBar extends RelativeLayout {
                 }
             }
         });
+        initRightView();
     }
 
-    public void setRightIcon1(int res, OnClickListener onClickListener) {
-        findViewById(R.id.icon1).setBackgroundResource(res);
-        findViewById(R.id.view1).setOnClickListener(onClickListener);
+    private void initRightView() {
+        if (TextUtils.isEmpty(rightTextStr) && iconRes == 0) {
+            findViewById(R.id.right_view).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.right_view).setVisibility(View.VISIBLE);
+        }
+
+        if (!TextUtils.isEmpty(rightTextStr)) {
+            findViewById(R.id.view1).setVisibility(View.GONE);
+            rightText.setText(rightTextStr);
+            rightText.setTextColor(righttextColor);
+            rightText.setTextSize(righttextSize);
+            rightText.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (iconRes != 0) {
+            findViewById(R.id.icon1).setBackgroundResource(iconRes);
+            rightText.setVisibility(View.GONE);
+            findViewById(R.id.view1).setVisibility(View.VISIBLE);
+        }
     }
+
+
+    public void setOnRightViewClickListener(OnClickListener onRightViewClickListener) {
+        findViewById(R.id.right_view).setOnClickListener(onRightViewClickListener);
+    }
+
+    public void showRightText(String text, OnClickListener onClickListener) {
+        this.rightTextStr = text;
+        initRightView();
+        setOnRightViewClickListener(onClickListener);
+    }
+
+    public void setRightTextSize(int textSize) {
+        this.righttextSize = textSize;
+        rightText.setTextSize(righttextSize);
+    }
+
+    public void setRighttextColor(@ColorInt int color) {
+        this.righttextColor = color;
+        rightText.setTextColor(color);
+    }
+
 
     public void setTitle(String text) {
         title.setText(text);
@@ -84,31 +142,6 @@ public class CommonTitleBar extends RelativeLayout {
     public void setTitle(String text, OnClickListener onClickListener) {
         setTitle(text);
         title.setOnClickListener(onClickListener);
-    }
-
-    public void addRightTextButton(String text, final OnClickListener onClickListener) {
-        rightText.setVisibility(VISIBLE);
-        rightText.setText(text);
-        findViewById(R.id.view1).setVisibility(View.GONE);
-        int color = isLight ? Color.parseColor("#535353") : Color.WHITE;
-        int color1 = Color.parseColor("#31bF00");
-        ColorStateList colorStateList = DrawableFactory.buildClickTextColor(color, color1);
-        rightText.setTextColor(colorStateList);
-        if (null != onClickListener) {
-            rightText.setOnClickListener(onClickListener);
-        }
-    }
-
-    public void addEnableRightTextButton(String text, final OnClickListener onClickListener) {
-        rightText.setVisibility(VISIBLE);
-        rightText.setText(text);
-        findViewById(R.id.view1).setVisibility(View.GONE);
-        int color = Color.parseColor("#e0e0e0");
-        int color1 = Color.parseColor("#31bF00");
-        DrawableFactory.buildEnableTextColor(color, color1);
-        if (null != onClickListener) {
-            rightText.setOnClickListener(onClickListener);
-        }
     }
 
     public TextView getTitle() {

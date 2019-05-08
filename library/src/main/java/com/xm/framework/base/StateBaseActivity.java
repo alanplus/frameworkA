@@ -113,4 +113,9 @@ public abstract class StateBaseActivity<T> extends BaseActivity implements IBase
     public void showLoadingDialog() {
         showLoadingDialog("正在加载...");
     }
+
+    @Override
+    public void finishPage() {
+        finish();
+    }
 }

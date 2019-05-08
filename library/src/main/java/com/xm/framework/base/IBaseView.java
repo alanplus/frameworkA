@@ -30,4 +30,6 @@ public interface IBaseView<T> {
     void dismissFailedLoadingDialog(String text, LoadingDialog.OnDialogDismissListener onDialogDismissListener);
 
     void showToast(String msg);
+
+    void finishPage();
 }
