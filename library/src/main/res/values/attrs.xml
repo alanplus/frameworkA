@@ -6,7 +6,8 @@
     <attr name="title_bar_title_size" format="dimension" />
     <attr name="title_bar_back_icon" format="reference" />
     <attr name="title_bar_enable_divider" format="boolean" />
-    <attr name="title_bar_right_text_color" format="color|reference" />
+    <attr name="title_bar_right_text_color" format="color" />
+    <attr name="title_bar_right_text_color_press" format="color" />
     <attr name="title_bar_right_text_size" format="dimension" />
 
     <attr name="status_bar_color" format="color|reference" />
@@ -22,8 +23,9 @@
 
         <attr name="divider_enable" format="boolean" />
         <attr name="bar_right_text" format="string|reference" />
-        <attr name="bar_right_text_color" format="color|reference" />
+        <attr name="bar_right_text_color" format="color" />
         <attr name="bar_right_text_size" format="dimension" />
+        <attr name="bar_right_text_color_press" format="color" />
 
         <attr name="bar_right_top_icon" format="reference" />
         <attr name="bar_right_left_icon" format="reference" />

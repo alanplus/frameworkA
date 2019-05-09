@@ -37,6 +37,7 @@ public class CommonTitleBar extends RelativeLayout {
     private String rightTextStr;
     private int righttextSize;
     private int righttextColor;
+    private int righttextColorPress;
     private int iconRes;
 
     private int leftIconRes;
@@ -92,6 +93,7 @@ public class CommonTitleBar extends RelativeLayout {
             rightTextStr = typedArray.getString(R.styleable.CommontTitleBarView_bar_right_text);
             righttextSize = (int) typedArray.getDimension(R.styleable.CommontTitleBarView_bar_right_text_size, getDefaultRightTextSize());
             righttextColor = typedArray.getColor(R.styleable.CommontTitleBarView_bar_right_text_color, getDefaultRightTextColor());
+            righttextColorPress = typedArray.getColor(R.styleable.CommontTitleBarView_bar_right_text_color_press, getDefaultRightPressTextColor());
             iconRes = typedArray.getResourceId(R.styleable.CommontTitleBarView_bar_right_icon, 0);
 
             leftDrawable = typedArray.getDrawable(R.styleable.CommontTitleBarView_bar_right_left_icon);
@@ -130,6 +132,10 @@ public class CommonTitleBar extends RelativeLayout {
 
     private int getDefaultRightTextColor() {
         return AndroidTools.getColorFromTheme(getContext(), R.attr.title_bar_right_text_color, Color.parseColor("#535353"));
+    }
+
+    private int getDefaultRightPressTextColor() {
+        return AndroidTools.getColorFromTheme(getContext(), R.attr.title_bar_right_text_color_press, Color.parseColor("#535353"));
     }
 
     private void init() {
@@ -185,7 +191,8 @@ public class CommonTitleBar extends RelativeLayout {
                 findViewById(R.id.view1).setVisibility(View.GONE);
                 rightText.setVisibility(View.VISIBLE);
                 rightText.setText(rightTextStr);
-                rightText.setTextColor(righttextColor);
+                ColorStateList colorStateList = DrawableFactory.buildClickTextColor(righttextColor, righttextColorPress);
+                rightText.setTextColor(colorStateList);
                 rightText.setTextSize(TypedValue.COMPLEX_UNIT_PX, righttextSize);
                 break;
             case 2:
