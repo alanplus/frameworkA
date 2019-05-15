@@ -13,6 +13,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <com.xm.framework.view.widget.SwitchButton
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone" />
+
+
         <TextView
             android:id="@+id/right_text"
             android:layout_width="wrap_content"
@@ -70,6 +78,7 @@
                 android:textColor="#333333"
                 android:textSize="13dp"
                 android:visibility="gone" />
+
 
         </LinearLayout>
 

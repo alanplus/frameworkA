@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.xm.framework.R;
 import com.xm.framework.base.layout.BaseRelativeLayout;
+import com.xm.framework.view.widget.SwitchButton;
 
 /**
  * Created by Mouse on 2019-05-08.
@@ -21,6 +22,8 @@ public class CommonItem extends BaseRelativeLayout {
     private TextView titleTextView, subTitleTextView, rightTextView;
 
     private View topLine, bottomLine;
+
+    private SwitchButton switchButton;
 
     public CommonItem(Context context) {
         super(context);
@@ -45,6 +48,7 @@ public class CommonItem extends BaseRelativeLayout {
         rightTextView = findViewById(R.id.right_text);
         topLine = findViewById(R.id.top_line);
         bottomLine = findViewById(R.id.bottom_line);
+        switchButton = findViewById(R.id.switch_button);
         initData(attrs);
     }
 
@@ -61,6 +65,8 @@ public class CommonItem extends BaseRelativeLayout {
         String rightText = typedArray.getString(R.styleable.CommonItem_ci_right_text);
         boolean showTopLine = typedArray.getBoolean(R.styleable.CommonItem_ci_show_top_line, false);
         boolean showBottomLine = typedArray.getBoolean(R.styleable.CommonItem_ci_show_bottom_line, true);
+        int showRightType = typedArray.getInt(R.styleable.CommonItem_show_right_type, 0);
+
 
         topLine.setVisibility(showTopLine ? View.VISIBLE : View.GONE);
         bottomLine.setVisibility(showBottomLine ? View.VISIBLE : View.GONE);
@@ -75,6 +81,7 @@ public class CommonItem extends BaseRelativeLayout {
             tagImageView.setImageResource(resourceId);
         }
         rightImageView.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        setShowRightType(showRightType);
         typedArray.recycle();
     }
 
@@ -88,5 +95,33 @@ public class CommonItem extends BaseRelativeLayout {
 
     public void setRightTextView(String text) {
         this.rightTextView.setText(text);
+    }
+
+    public void setShowRightType(int showRightType) {
+        switch (showRightType) {
+            case 0:
+                findViewById(R.id.right_arrow_layout).setVisibility(View.GONE);
+                break;
+            case 1:
+                switchButton.setVisibility(View.VISIBLE);
+                rightImageView.setVisibility(View.GONE);
+                rightTextView.setVisibility(View.GONE);
+                break;
+            case 2:
+                switchButton.setVisibility(View.GONE);
+                rightImageView.setVisibility(View.GONE);
+                rightTextView.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                switchButton.setVisibility(View.GONE);
+                rightImageView.setVisibility(View.VISIBLE);
+                rightTextView.setVisibility(View.GONE);
+                break;
+            case 4:
+                switchButton.setVisibility(View.GONE);
+                rightImageView.setVisibility(View.VISIBLE);
+                rightTextView.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

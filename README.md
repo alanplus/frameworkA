@@ -297,3 +297,16 @@ audioDownloadView.setAudioDownloadConfig(new AudioDownloadConfig(path, false));
 </declare-styleable>
 
 ```
+
+### 自定义View 
+
+#### SwitchButton
+
+```
+<com.xm.framework.view.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:checked="false" />
+
+```
