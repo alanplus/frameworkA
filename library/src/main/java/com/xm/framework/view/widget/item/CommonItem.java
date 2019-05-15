@@ -132,4 +132,40 @@ public class CommonItem extends BaseRelativeLayout {
     public boolean isChecked() {
         return switchButton.isChecked();
     }
+
+    public void setChecked(boolean check){
+        switchButton.setChecked(check);
+    }
+
+    public ImageView getTagImageView() {
+        return tagImageView;
+    }
+
+    public ImageView getRightImageView() {
+        return rightImageView;
+    }
+
+    public TextView getTitleTextView() {
+        return titleTextView;
+    }
+
+    public TextView getSubTitleTextView() {
+        return subTitleTextView;
+    }
+
+    public TextView getRightTextView() {
+        return rightTextView;
+    }
+
+    public View getTopLine() {
+        return topLine;
+    }
+
+    public View getBottomLine() {
+        return bottomLine;
+    }
+
+    public SwitchButton getSwitchButton() {
+        return switchButton;
+    }
 }
