@@ -124,4 +124,12 @@ public class CommonItem extends BaseRelativeLayout {
                 break;
         }
     }
+
+    public void setOnCheckedListener(SwitchButton.OnCheckedChangeListener onCheckedListener) {
+        switchButton.setOnCheckedChangeListener(onCheckedListener);
+    }
+
+    public boolean isChecked() {
+        return switchButton.isChecked();
+    }
 }
