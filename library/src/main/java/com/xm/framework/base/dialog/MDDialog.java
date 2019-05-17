@@ -236,7 +236,9 @@ public class MDDialog extends Dialog implements View.OnClickListener {
                 }
             }
         }
-        dismiss();
+        if (wrapper.autoDissmiss) {
+            dismiss();
+        }
     }
 
     public interface OnItemClickListener {
@@ -284,6 +286,8 @@ public class MDDialog extends Dialog implements View.OnClickListener {
         public int contentPaddingDp = 16;
         public int contentItemHeightDp = 56;
         public int contentTextSizeDp = 18;
+
+        boolean autoDissmiss = true;
     }
 
     public static class Builder {
@@ -477,6 +481,11 @@ public class MDDialog extends Dialog implements View.OnClickListener {
 
         public Builder setContentTextSizeDp(int contentTextSizeDp) {
             wrapper.contentTextSizeDp = contentTextSizeDp;
+            return this;
+        }
+
+        public Builder setAutoDissmiss(boolean autoDissmiss) {
+            wrapper.autoDissmiss = autoDissmiss;
             return this;
         }
 
