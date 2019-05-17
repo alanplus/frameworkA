@@ -33,7 +33,6 @@ public class AndroidStatusBarTools implements IStatusBarTools {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(bgColor);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         } else {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup viewGroup = (ViewGroup) activity.getWindow().getDecorView();
@@ -48,14 +47,18 @@ public class AndroidStatusBarTools implements IStatusBarTools {
             }
             setRootView(activity);
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean setStatusBarColor(Activity activity, boolean isWhite) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false;
-        if (!isWhite)
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        if (!isWhite) {
+//            int SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 1 << 13;
+            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//            activity.getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//            activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
         return true;
     }
 
