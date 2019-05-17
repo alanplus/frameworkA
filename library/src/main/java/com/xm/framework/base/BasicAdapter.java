@@ -1,8 +1,6 @@
 package com.xm.framework.base;
 
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
@@ -12,8 +10,8 @@ import java.util.List;
  */
 public abstract class BasicAdapter<T> extends BaseAdapter {
 
-    private Context context;
-    private List<T> list;
+    protected Context context;
+    protected List<T> list;
 
     public BasicAdapter(Context context, List<T> list) {
         this.context = context;
@@ -35,4 +33,11 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
         return position;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
 }
