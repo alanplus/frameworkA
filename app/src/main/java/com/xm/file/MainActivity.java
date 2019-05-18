@@ -1,6 +1,8 @@
 package com.xm.file;
 
 import com.xm.framework.base.BaseActivity;
+import com.xm.framework.tools.InputMethodTools;
+import com.xm.framework.view.widget.ClearEditText;
 
 /**
  * Created by Mouse on 2019/4/2.
@@ -8,6 +10,8 @@ import com.xm.framework.base.BaseActivity;
 public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
+        ClearEditText clearEditText = findViewById(R.id.edit_view);
+        InputMethodTools.forcedShowInputMethod(clearEditText, this);
 
     }
 

@@ -12,6 +12,7 @@
         android:checked="false" />
 
     <com.xm.framework.view.widget.ClearEditText
+        android:id="@+id/edit_view"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 </LinearLayout>
