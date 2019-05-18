@@ -3,7 +3,6 @@ package com.xm.framework.tools;
 import android.content.Context;
 import android.os.Handler;
 import android.view.View;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -24,6 +23,8 @@ public class InputMethodTools {
          * 3. EditText 必须已经获得焦点
          * 4. EditText 必须可见
          * 5. 当前布局必须已经完成加载
+         * 第二个参数 可以为0 InputMethod.SHOW_FORCE
+         * 如果不为0的话 隐藏方法有的时候会不好用
          */
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
@@ -32,7 +33,7 @@ public class InputMethodTools {
             @Override
             public void run() {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editText, InputMethod.SHOW_FORCED);
+                imm.showSoftInput(editText, 0);
             }
         }, 100);
     }
