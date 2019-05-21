@@ -25,6 +25,7 @@ public class InputMethodTools {
          * 5. 当前布局必须已经完成加载
          * 第二个参数 可以为0 InputMethod.SHOW_FORCE
          * 如果不为0的话 隐藏方法有的时候会不好用
+         * https://www.cnblogs.com/ldq2016/p/6861128.html
          */
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
