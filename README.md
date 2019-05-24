@@ -310,3 +310,20 @@ audioDownloadView.setAudioDownloadConfig(new AudioDownloadConfig(path, false));
         android:checked="false" />
 
 ```
+
+### 文件使用
+
+调用方法 AppStartTools.startAppByPath() 方法时 需在AndroidManifest.xml 中添加下列代码
+主要解决：android 7.0 无法使用文件的问题
+
+```
+<provider
+    android:name="android.support.v4.content.FileProvider"
+    android:authorities="com.alan.file.manager.provider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/provider_paths"/>
+</provider>
+```
