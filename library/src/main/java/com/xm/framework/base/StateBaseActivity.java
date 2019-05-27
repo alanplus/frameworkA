@@ -118,4 +118,14 @@ public abstract class StateBaseActivity<T> extends BaseActivity implements IBase
     public void finishPage() {
         finish();
     }
+
+    @Override
+    public LoadingDialog getLoadingDialog() {
+        return loadingDialog;
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        loadingDialog.dismiss();
+    }
 }

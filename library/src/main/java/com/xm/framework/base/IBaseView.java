@@ -21,6 +21,8 @@ public interface IBaseView<T> {
 
     void dismissFailedLoadingDialog();
 
+    void dismissLoadingDialog();
+
     void dismissSuccessLoadingDialog(String text);
 
     void dismissFailedLoadingDialog(String text);
@@ -32,4 +34,6 @@ public interface IBaseView<T> {
     void showToast(String msg);
 
     void finishPage();
+
+    LoadingDialog getLoadingDialog();
 }
