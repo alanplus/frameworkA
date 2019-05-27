@@ -1,6 +1,8 @@
 package com.xm.framework.tools;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -12,6 +14,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
 import android.os.StatFs;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -235,4 +238,15 @@ public class AndroidTools {
     public static String generateUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
+
+
+    public static void addClipBoard(Context context, String text) {
+        if (TextUtils.isEmpty(text)) {
+            return;
+        }
+        ClipboardManager myClipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData myClip = ClipData.newPlainText("text", text);
+        myClipboard.setPrimaryClip(myClip);
+    }
+
 }
