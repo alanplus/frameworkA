@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
         try {
             initView();
         } catch (Exception e) {
-            Logger.d("test_fragment e:" + e.getMessage());
+            Logger.d("test_fragment e:" + Log.getStackTraceString(e));
         }
         registMyReceiver();
         return mRoot;

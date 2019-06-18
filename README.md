@@ -68,11 +68,22 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 - implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
 - implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 - implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-- 'com.github.tbruyelle:rxpermissions:0.10.2@aar'
+- implementation 'com.github.tbruyelle:rxpermissions:0.10.2@aar'
+- implementation 'com.android.support:recyclerview-v7:28.0.0'
 
 ### 依赖的库
 
 - implementation 'com.google.code.gson:gson:2.7'
+
+- implementation files('libs/glide-3.7.0.jar')
+- implementation files('libs/okhttp-2.7.0.jar')
+- implementation files('libs/okio-1.6.0.jar')
+
+### 常用权限
+
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
 
 ### rxpermissions使用说明

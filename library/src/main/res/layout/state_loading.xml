@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.android.tools.widget.state.SmileyLoadingView
+    <com.xm.framework.view.state.SmileyLoadingView
         android:id="@+id/loading_view"
         android:layout_width="36dp"
         android:layout_height="36dp"
