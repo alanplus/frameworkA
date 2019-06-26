@@ -53,4 +53,12 @@ public abstract class AndroidToolsConfig {
         return "alan";
     }
 
+    public int getExitDuration() {
+        return 3000;
+    }
+
+    public String getExitMessage() {
+        return "再按一次退出程序";
+    }
+
 }

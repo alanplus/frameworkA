@@ -70,6 +70,7 @@ AndroidToolsConfig.init(new MyAndroidToolsConfig(this));
 - implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 - implementation 'com.github.tbruyelle:rxpermissions:0.10.2@aar'
 - implementation 'com.android.support:recyclerview-v7:28.0.0'
+- implementation 'org.greenrobot:eventbus:3.0.0'
 
 ### 依赖的库
 
