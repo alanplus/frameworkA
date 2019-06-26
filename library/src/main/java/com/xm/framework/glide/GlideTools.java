@@ -3,6 +3,7 @@ package com.xm.framework.glide;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -10,6 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.xm.framework.tools.Logger;
 
 import java.util.concurrent.ExecutionException;
 
@@ -41,7 +43,7 @@ public class GlideTools {
             }
             Glide.with(activity).load(url).placeholder(defRes).dontAnimate().transform(new GlideCircleTransform(activity)).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -61,7 +63,7 @@ public class GlideTools {
             }
             Glide.with(activity).load(url).dontAnimate().placeholder(defRes).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
 
     }
@@ -75,7 +77,7 @@ public class GlideTools {
         try {
             Glide.with(activity).load(url).dontAnimate().into(simpleTarget);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -90,7 +92,7 @@ public class GlideTools {
         try {
             Glide.with(activity).load(imageRes).dontAnimate().placeholder(defRes).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -104,7 +106,7 @@ public class GlideTools {
         try {
             Glide.with(activity).load(imageRes).dontAnimate().into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -118,7 +120,8 @@ public class GlideTools {
     public static void setRoundImageUrl(Context context, ImageView imgView, int res) {
         try {
             Glide.with(context).load(res).transform(new GlideRoundTransform(context, 5)).dontAnimate().into(imgView);
-        } catch (Exception ignore) {// 解决：Glide You cannot start a load for a destroyed activity
+        } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -175,7 +178,7 @@ public class GlideTools {
             }
             Glide.with(activity).load(url).placeholder(defRes).transform(new GlideCircleTransform(activity)).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -195,7 +198,7 @@ public class GlideTools {
             }
             Glide.with(activity).load(url).placeholder(defRes).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -210,7 +213,7 @@ public class GlideTools {
         try {
             Glide.with(activity).load(imageRes).placeholder(defRes).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 
@@ -225,7 +228,7 @@ public class GlideTools {
         try {
             Glide.with(context).load(res).transform(new GlideRoundTransform(context, 5)).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
-
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
 
     }
@@ -246,6 +249,7 @@ public class GlideTools {
             }
             Glide.with(activity).load(url).transform(new CenterCrop(activity), new GlideRoundTransform(activity, 5)).placeholder(defRes).into(imgView);
         } catch (Exception e) {// 解决：Glide You cannot start a load for a destroyed activity
+            Logger.d("glide tools error:" + Log.getStackTraceString(e));
         }
     }
 

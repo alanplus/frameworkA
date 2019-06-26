@@ -44,7 +44,11 @@ public class AudioDownloadViewHelper implements IAudioDownloadView {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickEvent();
+                if(v instanceof AudioDownloadView){
+                    ((AudioDownloadView)v).onClickEvent();
+                }else{
+                    onClickEvent();
+                }
             }
         });
     }
