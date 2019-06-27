@@ -16,7 +16,7 @@
 
     <include
         android:id="@+id/end_viewstub"
-        layout="@layout/view_footer_failure"
+        layout="@layout/view_footer_no_more"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
