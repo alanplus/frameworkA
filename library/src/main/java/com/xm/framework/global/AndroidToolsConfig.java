@@ -3,7 +3,7 @@ package com.xm.framework.global;
 import android.content.Context;
 import android.os.Handler;
 
-import com.xm.framework.database.DatabaseConfig;
+import com.xm.framework.db.base.DatabaseConfig;
 
 import java.io.File;
 

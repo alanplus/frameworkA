@@ -1,4 +1,4 @@
-package com.xm.framework.database;
+package com.xm.framework.db.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,7 +1,12 @@
-package com.xm.framework.database.config;
+package com.xm.framework.db.config;
+
+import com.xm.framework.db.annotation.ColumnAnnotation;
+import com.xm.framework.db.annotation.TableAnnotation;
+import com.xm.framework.db.base.SQLiteManager;
 
 import java.io.Serializable;
 
+@TableAnnotation(table = "config")
 public class Config implements Serializable {
 
     /**
@@ -9,8 +14,10 @@ public class Config implements Serializable {
      */
     private static final long serialVersionUID = 4425742063974628222L;
 
-    private String key;
-    private String value;
+    @ColumnAnnotation(name = "key", type = SQLiteManager.SQLiteTable.COL_TYPE_TEXT, isPrimarykey = true)
+    public String key;
+    @ColumnAnnotation(name = "value", type = SQLiteManager.SQLiteTable.COL_TYPE_TEXT)
+    public String value;
 
     public String getKey() {
         return key;

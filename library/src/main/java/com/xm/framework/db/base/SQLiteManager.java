@@ -1,4 +1,4 @@
-package com.xm.framework.database;
+package com.xm.framework.db.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,7 +28,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         mContext = context;
     }
 
-    static synchronized SQLiteDatabase getDB(Context context,
+    public static synchronized SQLiteDatabase getDB(Context context,
                                              DatabaseConfig config) {
         if (db == null) {
             mConfig = config;
@@ -93,9 +93,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         String COL_TYPE_DEFAULT = " DEFAULT(%s) ";
 
         void onCreate(SQLiteDatabase database);
-
-        void onUpdate(SQLiteDatabase database, int oldVersion,
-                      int newVersion);
+        void onUpdate(SQLiteDatabase database, int oldVersion, int newVersion);
     }
 
     public static void destroy() {
