@@ -103,6 +103,7 @@ public abstract class BaseDAO<T> implements SQLiteManager.SQLiteTable, IBaseDAO<
      * @return
      */
     public T findBySql(String sql) {
+        Logger.e("test_sql", sql);
         Cursor cursor = getDatabase().rawQuery(sql, null);
         List<T> list = findListByCursor(cursor, 1);
         return list.size() > 0 ? list.get(0) : null;

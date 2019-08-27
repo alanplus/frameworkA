@@ -5,16 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.xm.framework.db.base.BaseDAO;
+import com.xm.framework.tools.Logger;
 
-import java.lang.Override;
-import java.lang.String;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Automatically the code generate by Alan
- * Date:2019-08-22
+ * Date:2019-08-26
  */
 public class ConfigDAOImpl extends BaseDAO<Config> implements IConfigDAO {
     private static final String TABLE_NAME = "config";
@@ -48,4 +47,31 @@ public class ConfigDAOImpl extends BaseDAO<Config> implements IConfigDAO {
         contentValues.put("value", config.value);
         return contentValues;
     }
+
+
+    @Override
+    public Config getConfig(String key) {
+        return findBySql(String.format("select * from %s where key='%s'", TABLE_NAME, key));
+    }
+
+    @Override
+    public void clear(String... keys) {
+        StringBuilder stringBuilder = new StringBuilder("delete from ");
+        stringBuilder.append(TABLE_NAME);
+        stringBuilder.append(" where key not in (");
+
+        for (int i = 0; i < keys.length; i++) {
+            stringBuilder.append(keys[i]);
+            stringBuilder.append(i == keys.length - 1 ? ")" : ",");
+        }
+        Logger.d(stringBuilder.toString());
+        getDatabase().execSQL(stringBuilder.toString());
+    }
+
+
+    @Override
+    public void remove(String key) {
+        getDatabase().delete(TABLE_NAME, "key=?", args(key));
+    }
+
 }

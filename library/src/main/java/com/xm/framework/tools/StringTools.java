@@ -147,12 +147,33 @@ public class StringTools {
      * @return
      */
     public static boolean isAlvalidUserName(String name) {
-//        if (TextUtils.isEmpty(name)) {
-//            return false;
-//        }
         String str = "[a-zA-Z0-9_]{1,}";
         Pattern p = Pattern.compile(str);
         Matcher m = p.matcher(name);
         return m.matches();
+    }
+
+    public static int getInt(String s, int defaultValue) {
+        try {
+            return Integer.valueOf(s);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+    public static boolean getBoolean(String s, boolean defaultValue) {
+        try {
+            return Boolean.valueOf(s);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+    public static long getLong(String s, long defaultValue) {
+        try {
+            return Long.valueOf(s);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 }

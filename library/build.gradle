@@ -38,6 +38,5 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.squareup:javapoet:1.11.1'
-    implementation 'com.github.pengrad:jdk9-deps:1.0'
     implementation files('libs/abc.jar')
 }
