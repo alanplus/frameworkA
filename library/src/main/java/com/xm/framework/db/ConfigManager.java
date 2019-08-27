@@ -1,8 +1,6 @@
 package com.xm.framework.db;
 
 
-import android.content.Context;
-
 import com.xm.framework.db.config.Config;
 import com.xm.framework.db.config.ConfigDAOImpl;
 import com.xm.framework.db.config.IConfigDAO;
@@ -20,13 +18,13 @@ public class ConfigManager {
 
     private static ConfigManager instance;
 
-    private ConfigManager(Context context) {
+    private ConfigManager() {
         sp = new ConfigDAOImpl();
     }
 
-    public synchronized static ConfigManager getInstance(Context context) {
+    public synchronized static ConfigManager getInstance() {
         if (instance == null) {
-            instance = new ConfigManager(context.getApplicationContext());
+            instance = new ConfigManager();
         }
         return instance;
     }
@@ -42,12 +40,12 @@ public class ConfigManager {
         return config == null ? defValue : StringTools.getInt(config.value, defValue);
     }
 
-    public boolean getBooleanByKey(String key, boolean defValue) {
+    public boolean getBoolean(String key, boolean defValue) {
         Config config = sp.getConfig(key);
         return null == config ? defValue : StringTools.getBoolean(config.value, defValue);
     }
 
-    public long getLongByKey(String key, long defValue) {
+    public long getLong(String key, long defValue) {
         Config config = sp.getConfig(key);
         return null == config ? defValue : StringTools.getLong(config.value, defValue);
     }
