@@ -32,6 +32,7 @@ public abstract class BaseDAO<T> implements SQLiteManager.SQLiteTable, IBaseDAO<
     public BaseDAO(String tableName) {
         mContext = AndroidToolsConfig.androidToolsConfig.context;
         mConfig = AndroidToolsConfig.androidToolsConfig.getDatabaseConfig();
+        mTableName = tableName;
     }
 
     /*
