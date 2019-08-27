@@ -52,8 +52,8 @@ public class SQLiteManager extends SQLiteOpenHelper {
         for (Class<? extends SQLiteTable> clazz : classes) {
             try {
                 Constructor<? extends SQLiteTable> con = clazz
-                        .getConstructor(Context.class);
-                SQLiteTable table = con.newInstance(mContext);
+                        .getConstructor();
+                SQLiteTable table = con.newInstance();
                 table.onCreate(db);
             } catch (Exception e) {
                 Logger.d("database create error:" + e.getMessage());
@@ -67,8 +67,8 @@ public class SQLiteManager extends SQLiteOpenHelper {
         for (Class<? extends SQLiteTable> clazz : classes) {
             try {
                 Constructor<? extends SQLiteTable> con = clazz
-                        .getConstructor(Context.class);
-                SQLiteTable table = con.newInstance(mContext);
+                        .getConstructor();
+                SQLiteTable table = con.newInstance();
                 table.onUpdate(db, oldVersion, newVersion);
             } catch (Exception e) {
                 Logger.d("database update error:" + e.getMessage());
