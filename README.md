@@ -23,6 +23,36 @@ dependencies {
 }
 ```
 
+### 使用时 可能会报错
+
+在根目录下的build.gradle中添加
+
+```
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        google()
+        maven {url 'https://dl.bintray.com/jetbrains/anko'} //这是你需要加入的，这个是解决这个问题的关键地方，我就是添加这个maven后不再报上面的错误了
+    }
+}
+
+```
+
+在模块的build.gradle中添加
+```
+android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+```
+使用jdk1.8版本
+
+
 ### 全局配置
 
 - MyAndroidToolsConfig继承AndroidToolsConfig 修改配置
