@@ -133,7 +133,7 @@ public class CommonItem extends BaseRelativeLayout {
         return switchButton.isChecked();
     }
 
-    public void setChecked(boolean check){
+    public void setChecked(boolean check) {
         switchButton.setChecked(check);
     }
 
@@ -167,5 +167,17 @@ public class CommonItem extends BaseRelativeLayout {
 
     public SwitchButton getSwitchButton() {
         return switchButton;
+    }
+
+    public void setBottomLine(boolean isVisable) {
+        bottomLine.setVisibility(isVisable ? View.VISIBLE : View.GONE);
+    }
+
+    public void setTitleGravity(int gravity) {
+        titleTextView.setGravity(gravity);
+    }
+
+    public void setSubTitleTextView(int gravity) {
+        titleTextView.setGravity(gravity);
     }
 }
