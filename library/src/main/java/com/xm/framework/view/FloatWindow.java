@@ -96,7 +96,7 @@ public class FloatWindow {
         return windowManager != null;
     }
 
-    public boolean canShowWindowAndGo(Activity context) {
+    public static boolean canShowWindowAndGo(Activity context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
             Toast.makeText(context, "当前无权限，请授权", Toast.LENGTH_SHORT);
             Intent intent = new Intent();

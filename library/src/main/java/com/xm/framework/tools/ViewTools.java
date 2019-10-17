@@ -1,5 +1,6 @@
 package com.xm.framework.tools;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.MotionEvent;
 import android.view.View;
@@ -148,5 +149,10 @@ public class ViewTools {
         int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         view.measure(width, height);
         return view.getMeasuredWidth();
+    }
+
+    public static boolean isLandScape(Context context){
+        int[] screenSize = AndroidTools.getScreenSize(context);
+        return screenSize[0] > screenSize[1];
     }
 }
