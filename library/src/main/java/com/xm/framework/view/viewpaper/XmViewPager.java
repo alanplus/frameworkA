@@ -39,4 +39,8 @@ public class XmViewPager extends ViewPager {
     public void setScrollable(boolean scrollable) {
         isScrollable = scrollable;
     }
+
+    public boolean isScrollable() {
+        return isScrollable;
+    }
 }

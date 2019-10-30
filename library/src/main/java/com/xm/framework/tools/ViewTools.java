@@ -129,6 +129,11 @@ public class ViewTools {
         });
     }
 
+    /**
+     * 获取View的高度，但是不一定成功
+     * @param view
+     * @return
+     */
     public static int getTargetHeight(View view) {
         int measuredHeight = view.getMeasuredHeight();
         if (measuredHeight > 0) {
@@ -140,6 +145,12 @@ public class ViewTools {
         return view.getMeasuredHeight();
     }
 
+
+    /**
+     * 获取View的宽度，但是不一定成功
+     * @param view
+     * @return
+     */
     public static int getTargetWidth(View view) {
         int measuredWidth = view.getMeasuredWidth();
         if (measuredWidth > 0) {
@@ -151,6 +162,11 @@ public class ViewTools {
         return view.getMeasuredWidth();
     }
 
+    /**
+     * 判断 是否是横屏
+     * @param context
+     * @return
+     */
     public static boolean isLandScape(Context context){
         int[] screenSize = AndroidTools.getScreenSize(context);
         return screenSize[0] > screenSize[1];
