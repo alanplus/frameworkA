@@ -12,8 +12,4 @@ public class FileAndroidToolsConfig extends AndroidToolsConfig {
         super(context);
     }
 
-    @Override
-    public boolean isDebug() {
-        return true;
-    }
 }

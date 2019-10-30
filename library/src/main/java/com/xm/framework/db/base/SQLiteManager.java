@@ -4,8 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.xm.framework.R;
 import com.xm.framework.global.AndroidToolsConfig;
+import com.xm.framework.global.LibConfig;
+import com.xm.framework.tools.AndroidTools;
 import com.xm.framework.tools.Logger;
 
 import java.lang.reflect.Constructor;
@@ -29,7 +33,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     public static synchronized SQLiteDatabase getDB(Context context,
-                                             DatabaseConfig config) {
+                                                    DatabaseConfig config) {
         if (db == null) {
             mConfig = config;
             if (instance == null) {
@@ -37,11 +41,14 @@ public class SQLiteManager extends SQLiteOpenHelper {
                         config.getDatabaseVersion());
             }
             db = instance.getWritableDatabase();
-            String externalDatabaseName = AndroidToolsConfig.androidToolsConfig.getExternalDatabaseName();
-            if (!TextUtils.isEmpty(externalDatabaseName)) {
-                db.execSQL(String.format("attach DATABASE '/data/data/%s/databases/%s' AS 'c'", context.getPackageName(), externalDatabaseName));
+            try {
+                String externalDatabaseName = LibConfig.getExternalDatabaseName();
+                if (!TextUtils.isEmpty(externalDatabaseName)) {
+                    db.execSQL(String.format("attach DATABASE '/data/data/%s/databases/%s' AS 'c'", context.getPackageName(), externalDatabaseName));
+                }
+            } catch (Exception e) {
+                Logger.e(Log.getStackTraceString(e));
             }
-
         }
         return db;
     }
@@ -79,7 +86,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     /**
      * DAO表接口
      *
-     * @author DuShengjun<dushengjun                                                               @                                                               gmail.com>
+     * @author DuShengjun<dushengjun @ gmail.com>
      */
     public interface SQLiteTable {
         String COL_TYPE_AUTO_ID = "INTEGER PRIMARY KEY";
@@ -93,6 +100,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         String COL_TYPE_DEFAULT = " DEFAULT(%s) ";
 
         void onCreate(SQLiteDatabase database);
+
         void onUpdate(SQLiteDatabase database, int oldVersion, int newVersion);
     }
 

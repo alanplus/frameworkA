@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.xm.framework.global.AndroidToolsConfig;
+import com.xm.framework.global.LibConfig;
 import com.xm.framework.tools.Logger;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public abstract class BaseDAO<T> implements SQLiteManager.SQLiteTable, IBaseDAO<
      * @param tableName
      */
     public BaseDAO(String tableName) {
-        mContext = AndroidToolsConfig.androidToolsConfig.context;
-        mConfig = AndroidToolsConfig.androidToolsConfig.getDatabaseConfig();
+        mContext = LibConfig.getApplicationContext();
+        mConfig = LibConfig.getDatabaseConfig();
         mTableName = tableName;
     }
 

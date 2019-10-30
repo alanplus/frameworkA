@@ -19,6 +19,8 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.xm.framework.global.LibConfig;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -249,4 +251,15 @@ public class AndroidTools {
         myClipboard.setPrimaryClip(myClip);
     }
 
+    public static int getResourseInteger(int res) {
+        return LibConfig.getApplicationContext().getResources().getInteger(res);
+    }
+
+    public static String getResourseStr(int res) {
+        return LibConfig.getApplicationContext().getResources().getString(res);
+    }
+
+    public static Boolean getResourseBool(int res) {
+        return LibConfig.getApplicationContext().getResources().getBoolean(res);
+    }
 }

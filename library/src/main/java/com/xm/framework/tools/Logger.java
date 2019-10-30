@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.xm.framework.R;
 import com.xm.framework.global.AndroidToolsConfig;
 
 import java.io.File;
@@ -76,10 +77,7 @@ public class Logger {
     }
 
     private static String getTag() {
-        if (AndroidToolsConfig.androidToolsConfig == null) {
-            return "alan";
-        }
-        return AndroidToolsConfig.androidToolsConfig.logTag();
+        return AndroidTools.getResourseStr(R.string.log_tag);
     }
 
     public static void i(String msg) {
@@ -173,9 +171,6 @@ public class Logger {
     }
 
     public static boolean isDebug() {
-        if (AndroidToolsConfig.androidToolsConfig == null) {
-            return false;
-        }
-        return AndroidToolsConfig.androidToolsConfig.isDebug();
+        return AndroidTools.getResourseBool(R.bool.is_debug);
     }
 }

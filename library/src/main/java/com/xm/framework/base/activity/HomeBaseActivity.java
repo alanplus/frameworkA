@@ -126,6 +126,7 @@ public abstract class HomeBaseActivity extends BaseActivity implements BottomNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         mViewPager.setCurrentItem(getPosition(menuItem), mViewPager.isScrollable());
+        // 返回false menu点击没响应
         return true;
     }
 

@@ -3,7 +3,9 @@ package com.xm.framework.tools;
 import android.app.Activity;
 import android.os.Handler;
 
+import com.xm.framework.R;
 import com.xm.framework.global.AndroidToolsConfig;
+import com.xm.framework.global.LibConfig;
 
 /**
  * Created by Mouse on 2019-06-26.
@@ -13,7 +15,7 @@ public class ExitTools {
 
     private static ExitTools exitTools;
 
-    private int count = 0;
+    protected int count = 0;
 
     private ExitTools() {
 
@@ -32,12 +34,12 @@ public class ExitTools {
             return;
         }
         count++;
-        ToastManager.getInstance().showToast(activity, AndroidToolsConfig.androidToolsConfig.getExitMessage());
+        ToastManager.getInstance().showToast(activity, AndroidTools.getResourseStr(R.string.home_exit_msg));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 count = 0;
             }
-        }, AndroidToolsConfig.androidToolsConfig.getExitDuration());
+        }, AndroidTools.getResourseInteger(R.integer.home_exit_duration));
     }
 }

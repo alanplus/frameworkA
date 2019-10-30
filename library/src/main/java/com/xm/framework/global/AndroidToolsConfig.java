@@ -3,7 +3,9 @@ package com.xm.framework.global;
 import android.content.Context;
 import android.os.Handler;
 
+import com.xm.framework.R;
 import com.xm.framework.db.base.DatabaseConfig;
+import com.xm.framework.tools.AndroidTools;
 
 import java.io.File;
 
@@ -12,15 +14,28 @@ import java.io.File;
  */
 public abstract class AndroidToolsConfig {
 
+
+    public Context context;
+
     public AndroidToolsConfig(Context context) {
         this.context = context;
     }
 
-    public static AndroidToolsConfig androidToolsConfig;
-
-    public Context context;
-
+    /**
+     * 数据库配置
+     *
+     * @return
+     */
     public DatabaseConfig getDatabaseConfig() {
+        return null;
+    }
+
+    /**
+     * 获取Activity管理器
+     *
+     * @return
+     */
+    public IActivityListener getIActivityListener() {
         return null;
     }
 
@@ -28,9 +43,6 @@ public abstract class AndroidToolsConfig {
         return null;
     }
 
-    public static void init(AndroidToolsConfig androidToolsConfig) {
-        AndroidToolsConfig.androidToolsConfig = androidToolsConfig;
-    }
 
     public String getDownloadTempPath() {
         String path = "/data/data/" + context.getPackageName() + "/temp/";
@@ -43,22 +55,6 @@ public abstract class AndroidToolsConfig {
 
     public String getExternalDatabaseName() {
         return null;
-    }
-
-    public boolean isDebug() {
-        return false;
-    }
-
-    public String logTag() {
-        return "alan";
-    }
-
-    public int getExitDuration() {
-        return 3000;
-    }
-
-    public String getExitMessage() {
-        return "再按一次退出程序";
     }
 
 }

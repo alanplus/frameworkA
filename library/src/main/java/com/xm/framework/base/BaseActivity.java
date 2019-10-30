@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.xm.framework.R;
+import com.xm.framework.global.LibConfig;
 import com.xm.framework.tools.AndroidTools;
 import com.xm.framework.tools.statusbar.StatusBarTools;
 
@@ -36,10 +37,47 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onCreate(this);
+        }
         activityList.add(this);
         initEventBus();
         initStatusBar();
         initView();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onStart(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onResume(this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onPause(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onStop(this);
+        }
+
     }
 
     private void initEventBus() {
@@ -108,6 +146,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (null != LibConfig.getIActivityListener()) {
+            LibConfig.getIActivityListener().onDestroy(this);
+        }
+
         unregistEvenBus();
         activityList.remove(this);
     }

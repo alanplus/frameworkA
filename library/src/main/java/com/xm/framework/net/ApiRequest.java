@@ -3,6 +3,7 @@ package com.xm.framework.net;
 import android.support.annotation.IntDef;
 
 import com.xm.framework.global.AndroidToolsConfig;
+import com.xm.framework.global.LibConfig;
 import com.xm.framework.rx.RxSchedulers;
 import com.xm.framework.tools.AndroidTools;
 
@@ -52,7 +53,7 @@ public class ApiRequest {
         if (null == apiConfig) {
             return new ApiResult(ERROR_CODE_NO_DATA);
         }
-        if (!AndroidTools.isNetworkAvailable(AndroidToolsConfig.androidToolsConfig.context)) {
+        if (!AndroidTools.isNetworkAvailable(LibConfig.getApplicationContext())) {
             apiConfig.onOtherErrorCallback(ERROR_CODE_NO_NET);
             return new ApiResult(ERROR_CODE_NO_NET);
         }
@@ -66,7 +67,7 @@ public class ApiRequest {
         if (null == apiConfig) {
             return;
         }
-        if (!AndroidTools.isNetworkAvailable(AndroidToolsConfig.androidToolsConfig.context)) {
+        if (!AndroidTools.isNetworkAvailable(LibConfig.getApplicationContext())) {
             apiConfig.onOtherErrorCallback(ERROR_CODE_NO_NET);
             return;
         }
