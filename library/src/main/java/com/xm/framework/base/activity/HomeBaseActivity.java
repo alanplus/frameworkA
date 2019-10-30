@@ -19,6 +19,7 @@ import com.xm.framework.R;
 import com.xm.framework.base.BaseActivity;
 import com.xm.framework.buttondrawable.DrawableManager;
 import com.xm.framework.tools.AndroidTools;
+import com.xm.framework.tools.ExitTools;
 import com.xm.framework.view.viewpaper.PagerAdapter;
 import com.xm.framework.view.viewpaper.XmViewPager;
 
@@ -139,5 +140,10 @@ public abstract class HomeBaseActivity extends BaseActivity implements BottomNav
             }
         }
         return 0;
+    }
+
+    @Override
+    public void onBackPressed() {
+        ExitTools.getInstance().exit(this);
     }
 }
