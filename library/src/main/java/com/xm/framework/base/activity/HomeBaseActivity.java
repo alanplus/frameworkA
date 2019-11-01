@@ -1,14 +1,17 @@
 package com.xm.framework.base.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,11 +31,12 @@ import com.xm.framework.view.viewpaper.XmViewPager;
  * 时 间：2019-10-29
  * 简 述：主界面基类
  */
-public abstract class HomeBaseActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public abstract class HomeBaseActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
     protected View[] mMsgHitView;
     protected BottomNavigationView mBottomNavigationView;
     protected XmViewPager mViewPager;
+    protected PagerAdapter<Fragment> mPagerAdapter;
 
     @Override
     protected void initView() {
@@ -40,17 +44,19 @@ public abstract class HomeBaseActivity extends BaseActivity implements BottomNav
         mViewPager = findViewById(R.id.vp_home_pager);
         mBottomNavigationView.setItemIconTintList(null);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+        mBottomNavigationView.setItemHorizontalTranslationEnabled(true);
         mMsgHitView = new View[getTabSize()];
         initViewPager();
     }
 
     protected void initViewPager() {
         FragmentManager fm = getSupportFragmentManager();
-        PagerAdapter<Fragment> mPagerAdapter = new PagerAdapter<>(fm, getFragmentArray());
+        mPagerAdapter = new PagerAdapter<>(fm, getFragmentArray());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setScrollable(false);
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(getTabSize());
         mViewPager.setCurrentItem(0, false);
+        mViewPager.addOnPageChangeListener(this);
     }
 
     protected abstract Fragment[] getFragmentArray();
@@ -142,8 +148,29 @@ public abstract class HomeBaseActivity extends BaseActivity implements BottomNav
         return 0;
     }
 
+    private int getItemMenuId(int position) {
+        MenuItem item = mBottomNavigationView.getMenu().getItem(position);
+        return item.getItemId();
+    }
+
     @Override
     public void onBackPressed() {
         ExitTools.getInstance().exit(this);
     }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        mBottomNavigationView.setSelectedItemId(getItemMenuId(i));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
+
 }

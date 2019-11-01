@@ -15,6 +15,8 @@
     <attr name="is_debug" format="boolean" />
     <attr name="activity_mode" format="integer" />
 
+    <!-- 主界面 tab样式 -->
+    <attr name="home_tab_menu" format="reference" />
 
     <declare-styleable name="CommontTitleBarView">
         <attr name="bar_title" format="string|reference" />

@@ -19,6 +19,6 @@
         android:background="@android:color/white"
         app:itemTextColor="@drawable/txt_home_bottom_nav_selector"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_home_bottom_nav" />
+        app:menu="?attr/home_tab_menu" />
 
 </LinearLayout>
